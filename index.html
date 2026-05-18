@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASLODA | Ice Patrol</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
+
+        :root {
+            --ios-blue: #007AFF;
+            --glass: rgba(255, 255, 255, 0.4);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background-color: #f0f0f7;
+            /* Applying cursive font globally */
+            font-family: 'Dancing Script', cursive;
+        }
+
+        #bg-image {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('https://img.freepik.com/premium-photo/winter-horizontal-background-with-snowy-landscape-christmas-trees-snow-ball-cartoon-vector-illustration_1029473-33209.jpg') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.9); 
+            z-index: 1;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,122,255,0.1) 100%);
+            z-index: 2;
+        }
+
+        canvas { position: absolute; top: 0; left: 0; z-index: 5; }
+
+        #ui-layer {
+            position: absolute;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; z-index: 10;
+            pointer-events: none;
+        }
+
+        #score-wrap {
+            margin-top: 50px;
+            padding: 15px 45px;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Applying Pacifico for a distinct cursive score look */
+        #score { 
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem; 
+            font-weight: 800; 
+            color: #1d1d1f; 
+            line-height: 1; 
+        }
+
+        .label { 
+            color: var(--ios-blue); 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            text-transform: capitalize;
+            letter-spacing: 1px; 
+        }
+
+        #restart-btn {
+            display: none;
+            margin-top: 25vh;
+            padding: 20px 70px;
+            background: var(--ios-blue);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            pointer-events: all;
+            box-shadow: 0 15px 35px rgba(0, 122, 255, 0.4);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #restart-btn:hover { transform: scale(1.1); background: #0062cc; }
+    </style>
+</head>
+<body>
+
+<div id="bg-image"></div>
+<div id="overlay"></div>
+
+<div id="ui-layer">
+    <div id="score-wrap">
+        <div class="label">Aslzoda's Ice Patrol</div>
+        <div id="score">0</div>
+    </div>
+    <button id="restart-btn">Restart Game</button>
+</div>
+
+<canvas id="gameCanvas"></canvas>
+
+<script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreEl = document.getElementById("score");
+    const restartBtn = document.getElementById("restart-btn");
+
+    const heroImg = new Image();
+    heroImg.src = "https://png.pngtree.com/png-vector/20240925/ourmid/pngtree-cute-cartoon-penguin-large-expressive-eyes-standing-upright-chubby-body-black-png-image_13898694.png";
+
+    const HERO_W = 140; 
+    const HERO_H = 150;
+    const PLAT_H = 90; 
+
+    let score = 0, phase = "waiting", sceneOffset = 0, heroX = 0, heroY = 0;
+    let platforms = [], sticks = [], lastTime = 0;
+
+    function init() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        reset();
+        requestAnimationFrame(gameLoop);
+    }
+
+    function reset() {
+        score = 0;
+        scoreEl.innerText = score;
+        phase = "waiting";
+        sceneOffset = 0;
+        heroY = 0;
+        restartBtn.style.display = "none";
+        platforms = [{ x: 50, w: 100 }];
+        for(let i=0; i<100; i++) addPlatform();
+        sticks = [{ x: platforms[0].x + platforms[0].w, len: 0, rot: 0 }];
+        heroX = platforms[0].x + platforms[0].w - 35;
+    }
+
+    function addPlatform() {
+        const last = platforms[platforms.length - 1];
+        platforms.push({
+            x: last.x + last.w + 70 + Math.random() * 180,
+            w: 60 + Math.random() * 80
+        });
+    }
+
+    function gameLoop(time) {
+        let dt = time - lastTime;
+        lastTime = time;
+        if (isNaN(dt)) dt = 0;
+        update(dt);
+        draw();
+        requestAnimationFrame(gameLoop);
+    }
+
+    function update(dt) {
+        if (phase === "stretching") sticks[sticks.length-1].len += dt * 0.45;
+        else if (phase === "turning") {
+            sticks[sticks.length-1].rot += dt * 0.45;
+            if (sticks[sticks.length-1].rot >= 90) { 
+                sticks[sticks.length-1].rot = 90; 
+                phase = "walking"; 
+            }
+        } else if (phase === "walking") {
+            heroX += dt * 0.35;
+            const s = sticks[sticks.length-1];
+            const p = platforms.find(p => p.x < (s.x + s.len) && (s.x + s.len) < p.x + p.w);
+            const limit = p ? (p.x + p.w - 35) : (s.x + s.len + 25);
+            if (heroX >= limit) {
+                heroX = limit;
+                if (p) { 
+                    score++; 
+                    scoreEl.innerText = score; 
+                    phase = "transition"; 
+                } else phase = "falling";
+            }
+        } else if (phase === "transition") {
+            sceneOffset += dt * 0.6;
+            const s = sticks[sticks.length-1];
+            const p = platforms.find(p => p.x < (s.x + s.len) && (s.x + s.len) < p.x + p.w);
+            if (sceneOffset > p.x + p.w - 180) {
+                sticks.push({ x: p.x + p.w, len: 0, rot: 0 });
+                phase = "waiting";
+            }
+        } else if (phase === "falling") {
+            heroY += dt * 0.9;
+            if (heroY > 1000) restartBtn.style.display = "block";
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(canvas.width / 2 - 120 - sceneOffset, canvas.height / 2 + 200);
+
+        platforms.forEach(p => {
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = "rgba(0, 122, 255, 0.4)";
+            let grad = ctx.createLinearGradient(p.x, -PLAT_H, p.x, 500);
+            grad.addColorStop(0, "#007AFF");
+            grad.addColorStop(1, "rgba(0, 80, 200, 0.5)");
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.roundRect(p.x, -PLAT_H, p.w, 600, 15);
+            ctx.fill();
+            
+            ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+            ctx.fillRect(p.x + 5, -PLAT_H + 2, p.w - 10, 5);
+        });
+
+        const s = sticks[sticks.length-1];
+        ctx.save();
+        ctx.translate(s.x, -PLAT_H);
+        ctx.rotate(s.rot * Math.PI / 180);
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = "#007AFF";
+        ctx.strokeStyle = "#007AFF";
+        ctx.lineWidth = 7;
+        ctx.lineCap = "round";
+        ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -s.len); ctx.stroke();
+        ctx.strokeStyle = "white"; ctx.lineWidth = 2; ctx.stroke();
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(heroX, heroY - PLAT_H);
+        if (heroImg.complete) {
+            ctx.shadowBlur = 35;
+            ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
+            ctx.drawImage(heroImg, -HERO_W/2, -HERO_H + 10, HERO_W, HERO_H);
+        }
+        ctx.restore();
+
+        ctx.restore();
+    }
+
+    const start = () => { if (phase === "waiting") phase = "stretching"; };
+    const stop = () => { if (phase === "stretching") phase = "turning"; };
+    window.addEventListener("mousedown", start); window.addEventListener("mouseup", stop);
+    window.addEventListener("touchstart", (e) => { e.preventDefault(); start(); }, {passive: false});
+    window.addEventListener("touchend", (e) => { e.preventDefault(); stop(); }, {passive: false});
+    restartBtn.addEventListener("click", (e) => { e.stopPropagation(); reset(); });
+    window.addEventListener("resize", () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+    init();
+</script>
+</body>
+</html>
