@@ -1,6 +1,8 @@
 # 🐧 Aslzoda’s Ice Patrol
 
 Aslzoda’s Ice Patrol shunchaki oddiy o'yin emas — bu yuqori unumdorlik va premium vizual tajribani ✨ taklif qiluvchi zamonaviy 2D veb-arkada o'yini 🚀. U foydalanuvchidan kuchli diqqat-e'tibor va aniqlikni talab qiladigan, muzli platformalar bo'ylab qiziqarli sarguzashtni taqdim etish uchun maxsus yaratilgan.
+<img width="1280" height="643" alt="image" src="https://github.com/user-attachments/assets/4ca6a174-236b-486e-96cb-34a838af395b" />
+<img width="1280" height="643" alt="image" src="https://github.com/user-attachments/assets/9c3ee316-9695-455c-9bbb-9677755bba40" />
 
 ---
 
