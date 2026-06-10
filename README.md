@@ -1,6 +1,6 @@
-# 🐧 Aslzoda’s Ice Patrol
+# 🐧 𝒜𝓈𝓁𝓏𝑜𝒹𝒶’𝓈 𝐼𝒸𝑒 𝒫𝒶𝓉𝓇𝑜𝓁
 
-Aslzoda’s Ice Patrol shunchaki oddiy o'yin emas — bu yuqori unumdorlik va premium vizual tajribani ✨ taklif qiluvchi zamonaviy 2D veb-arkada o'yini 🚀. U foydalanuvchidan kuchli diqqat-e'tibor va aniqlikni talab qiladigan, muzli platformalar bo'ylab qiziqarli sarguzashtni taqdim etish uchun maxsus yaratilgan.
+ᴀꜱʟᴢᴏᴅᴀ’ꜱ ɪᴄᴇ ᴘᴀᴛʀᴏʟ ꜱʜᴜɴᴄʜᴀᴋɪ ᴏᴅᴅɪʏ ᴏ'ʏɪɴ ᴇᴍᴀꜱ — ʙᴜ ʏᴜQᴏʀɪ ᴜɴᴜᴍᴅᴏʀʟɪᴋ ᴠᴀ ᴘʀᴇᴍɪᴜᴍ ᴠɪᴢᴜᴀʟ ᴛᴀᴊʀɪʙᴀɴɪ ✨ ᴛᴀᴋʟɪꜰ Qɪʟᴜᴠᴄʜɪ ᴢᴀᴍᴏɴᴀᴠɪʏ 2ᴅ ᴠᴇʙ-ᴀʀᴋᴀᴅᴀ ᴏ'ʏɪɴɪ 🚀. ᴜ ꜰᴏʏᴅᴀʟᴀɴᴜᴠᴄʜɪᴅᴀɴ ᴋᴜᴄʜʟɪ ᴅɪQQᴀᴛ-ᴇ'ᴛɪʙᴏʀ ᴠᴀ ᴀɴɪQʟɪᴋɴɪ ᴛᴀʟᴀʙ Qɪʟᴀᴅɪɢᴀɴ, ᴍᴜᴢʟɪ ᴘʟᴀᴛꜰᴏʀᴍᴀʟᴀʀ ʙᴏ'ʏʟᴀʙ QɪᴢɪQᴀʀʟɪ ꜱᴀʀɢᴜᴢᴀꜱʜᴛɴɪ ᴛᴀQᴅɪᴍ ᴇᴛɪꜱʜ ᴜᴄʜᴜɴ ᴍᴀxꜱᴜꜱ ʏᴀʀᴀᴛɪʟɢᴀɴ.
 <img width="1280" height="643" alt="image" src="https://github.com/user-attachments/assets/4ca6a174-236b-486e-96cb-34a838af395b" />
 <img width="1280" height="643" alt="image" src="https://github.com/user-attachments/assets/9c3ee316-9695-455c-9bbb-9677755bba40" />
 
@@ -18,7 +18,7 @@ Aslzoda’s Ice Patrol shunchaki oddiy o'yin emas — bu yuqori unumdorlik va pr
 https://aslzoda-s-game.netlify.app/
 ## 🛠 Tech Stack
 
-Ushbu loyiha hech qanday tashqi kutubxonalarsiz, eng toza va zamonaviy veb-texnologiyalar yordamida qurilgan:
+𝐔𝐬𝐡𝐛𝐮 𝐥𝐨𝐲𝐢𝐡𝐚 𝐡𝐞𝐜𝐡 𝐪𝐚𝐧𝐝𝐚𝐲 𝐭𝐚𝐬𝐡𝐪𝐢 𝐤𝐮𝐭𝐮𝐛𝐱𝐨𝐧𝐚𝐥𝐚𝐫𝐬𝐢𝐳, 𝐞𝐧𝐠 𝐭𝐨𝐳𝐚 𝐯𝐚 𝐳𝐚𝐦𝐨𝐧𝐚𝐯𝐢𝐲 𝐯𝐞𝐛-𝐭𝐞𝐱𝐧𝐨𝐥𝐨𝐠𝐢𝐲𝐚𝐥𝐚𝐫 𝐲𝐨𝐫𝐝𝐚𝐦𝐢𝐝𝐚 𝐪𝐮𝐫𝐢𝐥𝐠𝐚𝐧:
 
 * 🌐 **HTML5 Canvas** — O'yin olami, qahramon harakatlari va barcha grafikalarni yuqori sifatda chizish uchun asosiy vosita.
 * 🎨 **CSS3** — Zamonaviy Apple uslubidagi interfeys, neon effektlar, blur animatsiyalari va moslanuvchan dizayn.
@@ -27,4 +27,4 @@ Ushbu loyiha hech qanday tashqi kutubxonalarsiz, eng toza va zamonaviy veb-texno
 
 ---
 
-⭐ **Agar o'yin dizayni va mexanikasi sizga yoqqan bo'lsa, repozitoriyaga yulduzcha (star) bosishni unutmang!** Aslzoda tomonidan ❤️  yaratildi.
+⭐ **Agar o'yin dizayni va mexanikasi sizga yoqqan bo'lsa, repozitoriyaga yulduzcha (star) bosishni unutmang!** ʙʏ ᴍᴇ - ᴀꜱʟᴢᴏᴅᴀ ❤️  
