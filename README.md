@@ -27,4 +27,5 @@ https://aslzoda-s-game.netlify.app/
 
 ---
 
-⭐ **Agar o'yin dizayni va mexanikasi sizga yoqqan bo'lsa, repozitoriyaga yulduzcha (star) bosishni unutmang!** ʙʏ ᴍᴇ - ᴀꜱʟᴢᴏᴅᴀ ❤️  
+⭐ **Agar o'yin dizayni va mexanikasi sizga yoqqan bo'lsa, repozitoriyaga yulduzcha (star) bosishni unutmang!** 
+**ʙʏ ᴍᴇ - ᴀꜱʟᴢᴏᴅᴀ ❤️**
